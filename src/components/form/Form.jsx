@@ -1,13 +1,16 @@
 import React from "react";
-import { View, Text } from "react-native"
+import { View, Text, Select } from "react-native-web"
 import { Input, Button } from 'react-native-elements';
+import SelectComponent from "../select/SelectComponent";
+
 
 const Form = ({name}) => {
   return (
-    <View>
+    <View style={{flex: 1, display: 'flex'}}>
       <Text> {name} </Text>
-      <View>
+      <View  >
         <Input placeholder="Ej: Juan" />
+        <SelectComponent />
         <Button title={'Eliminar campo'} />
       </View>
       <View>
