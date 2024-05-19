@@ -1,25 +1,44 @@
 import React from "react";
-import { View, Text, Select } from "react-native-web"
-import { Input, Button } from 'react-native-elements';
+import { View } from "react-native-web"
+import { connect } from "react-redux";
+import { Input, Button, Text  } from 'react-native-elements';
 import SelectComponent from "../select/SelectComponent";
+import { addField, removeField } from "../../redux/actions/action";
+
+const Form = ({ name, fields, addField, removeField }) => {
 
 
-const Form = ({name}) => {
+  const handleAddField = () => {
+    addField();
+  };
+
+  const handleRemoveField = () => {
+    removeField();
+  };
+
   return (
-    <View style={{flex: 1, display: 'flex'}}>
+    <View style={{ flex: 1, display: 'flex' }}>
       <Text> {name} </Text>
-      <View  >
+      <View>
+        <Text h4={true} > Ingrese el nombre del campo:</Text>
         <Input placeholder="Ej: Juan" />
         <SelectComponent />
-        <Button title={'Eliminar campo'} />
+        <Button title={'Eliminar campo'} onPress={handleRemoveField} />
       </View>
       <View>
-        <Button title={'Agregar campo'} />
+        <Button title={'Agregar campo'} onPress={handleAddField} />
       </View>
     </View>
   )
 }
 
+const mapStateToProps = state => ({
+  fields: state.fields
+});
 
+const mapDispatchToProps = {
+  addField,
+  removeField
+}
 
-export default Form;
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
