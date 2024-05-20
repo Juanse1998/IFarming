@@ -1,15 +1,18 @@
 import React from "react";
-import { View, Button, FlatList, Text } from "react-native-web";
+import { View, Button, FlatList } from "react-native-web";
 import { removeForm } from "../../redux/actions/action";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native'; 
 
-
-const FormList = ({ forms, removeForm }) => {
+const ListForm = ({ forms, removeForm }) => {
   const navigation = useNavigation();
 
-  const handleSeeForm = (item) => {
+  const navigateSeeForm = (item) => {
     navigation.navigate('SeeFormScreen', { form: item });
+  };
+
+  const navigateEditForm = (item) => {
+    navigation.navigate('EditFormScreen', { form: item });
   };
 
   return (
@@ -21,9 +24,9 @@ const FormList = ({ forms, removeForm }) => {
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <h3> {item.name} </h3>
             <View style={{ flexDirection: 'row' }}>
-              <Button title="Ver" onPress={() => handleSeeForm(item)} />
-              <Button title="Editar" onPress={() => removeForm(item.id)} />
-              <Button title="Eliminar" onPress={() => handleEditForm(item)} />
+              <Button title="Ver" onPress={() => navigateSeeForm(item)} />
+              <Button title="Eliminar" onPress={() => removeForm(item.id)} />
+              <Button title="Editar" onPress={() => navigateEditForm(item)} />
             </View>
           </View>
           )}
@@ -40,4 +43,4 @@ const mapDispatchToProps = {
   removeForm
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormList);
+export default connect(mapStateToProps, mapDispatchToProps)(ListForm);
