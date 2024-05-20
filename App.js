@@ -1,14 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './src/redux/store/store';
-import { View } from 'react-native-web';
-import FormList from './src/components/form/FormList';
+import AppNavigator from './src/AppNavigator';
 
 const App = () => (
   <Provider store={store}>
-    <View style={{ padding: 20 }}>
-      <FormList />
-    </View>
+    <AppNavigator />
   </Provider>
 );
 
