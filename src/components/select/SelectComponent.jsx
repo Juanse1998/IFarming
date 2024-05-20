@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Picker, StyleSheet } from 'react-native';
 
-const SelectComponent = () => {
-  const [selectedValue, setSelectedValue] = useState(null);
+const SelectComponent = ({selectedValue, setSelectedValue}) => {
 
   return (
     <View style={styles.container}>
