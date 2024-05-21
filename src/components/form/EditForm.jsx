@@ -6,7 +6,6 @@ import { addField, removeField, updateField } from '../../redux/actions/action';
 
 const EditForm = ({ route, updateField, addField, removeField }) => {
   const [errorFields, setErrorFields] = useState(null);
-  
   const { form } = route.params;
   const [fields, setFields] = useState(form ? [...form.fields] : []);
 
@@ -18,7 +17,7 @@ const EditForm = ({ route, updateField, addField, removeField }) => {
 
   const handleUpdateField = (index) => {
     const updatedField = fields[index];
-    if (!updatedField.fieldName || updatedField.placeholder || updatedField.inputType) {
+    if (!updatedField.fieldName || !updatedField.placeholder || !updatedField.inputType) {
       setErrorFields("¡Debe completar los datos del campo!");
       return;
     }
@@ -30,6 +29,13 @@ const EditForm = ({ route, updateField, addField, removeField }) => {
     const updatedFields = [...fields];
     updatedFields[index][key] = value;
     setFields(updatedFields);
+  };
+
+  const handleRemoveField = (index) => {
+    const updatedFields = [...fields];
+    updatedFields.splice(index, 1);
+    setFields(updatedFields);
+    removeField(form.id, index);
   };
 
   return (
@@ -53,9 +59,11 @@ const EditForm = ({ route, updateField, addField, removeField }) => {
             selectedValue={field.inputType}
             setSelectedValue={(value) => handleChangeField(index, 'inputType', value)}
           />
-          <Button title={'Eliminar campo'} onPress={() => removeField(form.id, index)} />
-          <Button title="Actualizar campo" onPress={() => handleUpdateField(index)} />
-          {errorFields && <Text style={{ color: 'red' }}>{errorFields}</Text>}
+          <View style={{width: 200}} >
+            <Button title={'Eliminar campo'} onPress={() => handleRemoveField(index)} />
+            <Button title="Actualizar campo" onPress={() => handleUpdateField(index)} />
+            {errorFields && <Text style={{ color: 'red' }}>{errorFields}</Text>}
+          </View>
         </View>
       ))}
       <Button title={'Agregar campo'} onPress={handleAddField} />
