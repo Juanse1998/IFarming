@@ -1,54 +1,72 @@
-import React from "react";
-import { View, Button, FlatList, Text } from "react-native-web";
-import { removeForm } from "../../redux/actions/action";
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button } from 'react-native';
+import SelectComponent from '../select/SelectComponent';
 import { connect } from "react-redux";
-import { useNavigation } from '@react-navigation/native'; 
+import { addField, removeField, updateField } from '../../redux/actions/action';
 
+const EditForm = ({ route, updateField, addField, removeField }) => {
+  const [errorFields, setErrorFields] = useState(null);
+  
+  const { form } = route.params;
+  const [fields, setFields] = useState(form ? [...form.fields] : []);
 
-const EditForm = ({ forms, updateForm }) => {
-  const navigation = useNavigation();
+  const handleAddField = () => {
+    const newField = { fieldName: '', placeholder: '', inputType: '' };
+    setFields([...fields, newField]);
+    addField(form.id, newField.fieldName, newField.placeholder, newField.inputType);
+  };
 
-  const handleEditForm = () => {
-    navigation.navigate('FormEditScreen');
+  const handleUpdateField = (index) => {
+    const updatedField = fields[index];
+    if (!updatedField.fieldName || updatedField.placeholder || updatedField.inputType) {
+      setErrorFields("¡Debe completar los datos del campo!");
+      return;
+    }
+    updateField(form.id, index, updatedField.fieldName, updatedField.placeholder, updatedField.inputType);
+    setErrorFields(null);
+  };
+
+  const handleChangeField = (index, key, value) => {
+    const updatedFields = [...fields];
+    updatedFields[index][key] = value;
+    setFields(updatedFields);
   };
 
   return (
     <View style={{ flex: 1, display: 'flex', flexDirection: 'column', marginVertical: 10 }}>
-    <Text>{name}</Text>
-    {fields.map((element, index) => (
-      <View key={index} style={{ marginVertical: 10 }}>
-        <Text>Nombre del campo: {element.fieldName}</Text>
-        <TextInput
-          onChangeText={text => setInputName(text)}
-          value={inputName}
-          placeholder="Ej: Nombre"
-          style={{ borderWidth: 1, padding: 5 }}
-        />
-        <Text>Placeholder: {element.placeholder}</Text>
-        <TextInput
-          onChangeText={text => setInputPlaceholder(text)}
-          value={inputPlaceholder}
-          placeholder="Ej: Juan"
-          style={{ borderWidth: 1, padding: 5 }}
-        />
-        <Text>Tipo de campo: {element.inputType}</Text>
-        <Text>Seleccione el tipo de campo:</Text>
-        <SelectComponent selectedValue={selectedValue} setSelectedValue={setSelectedValue} />
-        <Button title="Actualizar campo" onPress={() => handleUpdateField(index)} />
-      </View>
-    ))}
-    <Button title={'Agregar campo'} onPress={handleAddField} />
-    <Button title={'Eliminar último campo'} onPress={() => removeField(formId)} />
-  </View>
-  )
-}
-
-const mapStateToProps = state => ({
-  forms: state.form.forms
-});
-
-const mapDispatchToProps = {
-  removeForm
+      {fields.map((field, index) => (
+        <View key={index} style={{ marginVertical: 10 }}>
+          <Text>Nombre del campo:</Text>
+          <TextInput
+            onChangeText={(text) => handleChangeField(index, 'fieldName', text)}
+            value={field.fieldName}
+            style={{ borderWidth: 1, padding: 5 }}
+          />
+          <Text>Placeholder:</Text>
+          <TextInput
+            onChangeText={(text) => handleChangeField(index, 'placeholder', text)}
+            value={field.placeholder}
+            placeholder="Ej: Juan"
+            style={{ borderWidth: 1, padding: 5 }}
+          />
+          <SelectComponent
+            selectedValue={field.inputType}
+            setSelectedValue={(value) => handleChangeField(index, 'inputType', value)}
+          />
+          <Button title={'Eliminar campo'} onPress={() => removeField(form.id, index)} />
+          <Button title="Actualizar campo" onPress={() => handleUpdateField(index)} />
+          {errorFields && <Text style={{ color: 'red' }}>{errorFields}</Text>}
+        </View>
+      ))}
+      <Button title={'Agregar campo'} onPress={handleAddField} />
+    </View>
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditForm);
+const mapDispatchToProps = {
+  updateField,
+  addField,
+  removeField
+};
+
+export default connect(null, mapDispatchToProps)(EditForm);
