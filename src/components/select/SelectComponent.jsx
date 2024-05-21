@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, Picker, StyleSheet } from 'react-native';
 
-const SelectComponent = () => {
-  const [selectedValue, setSelectedValue] = useState(null);
+const SelectComponent = ({selectedValue, setSelectedValue}) => {
 
   return (
     <View style={styles.container}>
@@ -12,12 +11,12 @@ const SelectComponent = () => {
         style={styles.picker}
         onValueChange={(itemValue) => setSelectedValue(itemValue)}
       >
+        <Picker.Item label="Seleccionar" value={null} />
         <Picker.Item label="Texto" value="text" />
         <Picker.Item label="Número" value="number" />
         <Picker.Item label="Contraseña" value="password" />
         <Picker.Item label="Email" value="email" />
       </Picker>
-      <Text style={styles.selectedText}>Seleccionado: {selectedValue}</Text>
     </View>
   );
 };
