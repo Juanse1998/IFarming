@@ -24,7 +24,7 @@ const formReducer = (state = initialState, action) => {
       delete copyForms[formId];
       return {
         ...state,
-        forms: remainingForms
+        forms: copyForms
       };
     }
     case 'ADD_FIELD': {
