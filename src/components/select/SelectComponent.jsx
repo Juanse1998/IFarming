@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Text, Picker, StyleSheet } from 'react-native';
 
-const SelectComponent = ({selectedValue, setSelectedValue}) => {
-
+const SelectComponent = ({ selectedValue, setSelectedValue }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Seleccione el tipo de dato:</Text>
@@ -23,21 +22,18 @@ const SelectComponent = ({selectedValue, setSelectedValue}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+    width: '400px'
   },
   label: {
-    fontSize: 18,
-    marginBottom: 7,
+    fontSize: 16,
+    marginRight: 10, 
   },
   picker: {
-    height: 35,
-    width: 200,
-  },
-  selectedText: {
-    fontSize: 18,
-    marginTop: 10,
+    height: 30,
+    flex: 1
   },
 });
 
