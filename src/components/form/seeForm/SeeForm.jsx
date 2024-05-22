@@ -1,6 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Input } from "react-native-elements";
+import { View, Text, Input } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { styles } from "./styles";
 
@@ -18,7 +17,7 @@ const SeeForm = ({ route }) => {
               <Picker
                 selectedValue={element.selectedOption}
                 style={styles.picker}
-                enabled={true} // Para deshabilitar la selección
+                enabled={true}
               >
                 {element.options.map((option, optionIndex) => (
                   <Picker.Item

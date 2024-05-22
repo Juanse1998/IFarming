@@ -19,7 +19,7 @@ const SelectComponent = ({ selectedValue, setSelectedValue, options, addOption, 
       <View style={styles.pickerContainer}>
         <Picker
           selectedValue={selectedValue}
-          style={[styles.picker, Platform.OS === 'ios' && styles.pickerIOS]} // Agregar estilo específico para iOS
+          style={[styles.picker, Platform.OS === 'ios' && styles.pickerIOS]}
           onValueChange={(itemValue) => setSelectedValue(itemValue)}
           enabled={editable}
         >
