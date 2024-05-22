@@ -34,9 +34,9 @@ const CreateForm = ({ addForm, addField }) => {
   };
 
   return (
-  <View style={styles.container}>
-    <View style={styles.containerCard}>
-      <Text style={styles.title}>CREA TU FORMULARIO</Text>
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.title}>CREA TU FORMULARIO</Text>
         <Text style={styles.label}>Ingrese el nombre del formulario:</Text>
         <TextInput
           value={formName}
@@ -51,14 +51,14 @@ const CreateForm = ({ addForm, addField }) => {
         <View style={styles.buttonContainer}>
           <Button title="Ver Formularios" onPress={handleSeeForms} />
         </View>
-      <Modal style={{alignItems: 'center'}} isVisible={isModalVisible} onBackdropPress={showModal}>
-        <View style={styles.modalContent}>
-          <Text style={styles.modalText}>¡Formulario creado con éxito!</Text>
-          <Button title="Cerrar" onPress={showModal} />
-        </View>
-      </Modal>
+        <Modal style={styles.modal} isVisible={isModalVisible} onBackdropPress={showModal}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>¡Formulario creado con éxito!</Text>
+            <Button title="Cerrar" onPress={showModal} />
+          </View>
+        </Modal>
+      </View>
     </View>
-  </View>
   );
 }
 
@@ -67,54 +67,60 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Platform.OS === 'web' ? '#fff' : '#1E40AF', 
-    width: '100%',
-    padding: 20,
+    backgroundColor: '#f0f0f0',
   },
-  containerCard: {
+  card: {
     alignItems: 'center',
-    backgroundColor: Platform.OS === 'web' ? '#fff' : '#1E40AF', 
-    width: Platform.OS === 'web' ? '300px' : '60%',
+    backgroundColor: '#ffffff',
+    width: Platform.OS === 'web' ? 300 : '80%',
     padding: 20,
-    border: '1px solid black',
-    boxShadow: '5px 5px'
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5,
   },
   title: {
     fontSize: 20,
-    marginBottom: 50
+    marginBottom: 20,
+    fontWeight: 'bold',
+    color: '#333333',
   },
   label: {
-    fontSize: 15,
+    fontSize: 16,
     marginBottom: 10,
-    color: Platform.OS === 'web' ? '#000' : '#fff', 
+    color: '#333333',
   },
   input: {
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     padding: 10,
-    width: Platform.OS === 'web' ? '200px' : '60%', 
+    width: '100%',
     borderRadius: 5,
     marginBottom: 10,
-    border: '1px solid black'
+    borderWidth: 1,
+    borderColor: '#cccccc',
   },
   error: {
     color: 'red',
     marginBottom: 10,
-    width: Platform.OS === 'web' ? '200px' : '60%',
   },
   buttonContainer: {
-    width: Platform.OS === 'web' ? '200px' : '60%',
+    width: '100%',
     marginBottom: 10,
   },
+  modal: {
+    alignItems: 'center',
+  },
   modalContent: {
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     padding: 20,
     borderRadius: 10,
     alignItems: 'center',
-    width: Platform.OS === 'web' ? '280px' : '60%', 
   },
   modalText: {
     fontSize: 18,
     marginBottom: 20,
+    color: '#333333',
   },
 });
 
