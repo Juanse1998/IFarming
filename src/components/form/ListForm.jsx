@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, FlatList, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, FlatList, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { removeForm } from "../../redux/actions/action";
 import { useNavigation } from '@react-navigation/native';
@@ -28,15 +28,15 @@ const ListForm = ({ forms, removeForm }) => {
             <View style={styles.itemContainer}>
               <Text style={styles.itemText}>{item.name}</Text>
               <View style={styles.buttonContainer}>
-                <View style={styles.buttonWrapper}>
-                  <Button title="Ver" onPress={() => navigateSeeForm(item)} />
-                </View>
-                <View style={styles.buttonWrapper}>
-                  <Button title="Eliminar" onPress={() => removeForm(item.id)} /> 
-                </View>
-                <View style={styles.buttonWrapper}>
-                  <Button title="Editar" onPress={() => navigateEditForm(item)} />   
-                </View>
+                <TouchableOpacity style={styles.buttonWrapper} onPress={() => navigateSeeForm(item)}>
+                  <Text style={styles.buttonText}>Ver</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonWrapper} onPress={() => navigateEditForm(item)}>
+                  <Text style={styles.buttonText}>Editar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonWrapper} onPress={() => removeForm(item.id)}>
+                  <Text style={styles.buttonText}>Eliminar</Text>
+                </TouchableOpacity>
               </View>
             </View>
           )}
@@ -83,10 +83,16 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     marginLeft: 10,
+    backgroundColor: '#037DAA',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
   },
-  contentButton: {
-    marginRight: 5
-  }
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
 
 const mapStateToProps = state => ({

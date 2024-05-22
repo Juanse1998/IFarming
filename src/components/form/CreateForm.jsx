@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addField, addForm } from "../../redux/actions/action";
-import { View, Button, TextInput, Text, StyleSheet, Platform } from "react-native";
+import { View, TouchableOpacity, TextInput, Text, StyleSheet, Platform } from "react-native";
 import { useNavigation } from '@react-navigation/native'; 
 import Modal from 'react-native-modal';
 
@@ -45,16 +45,18 @@ const CreateForm = ({ addForm, addField }) => {
           style={styles.input}
         />
         {error && <Text style={styles.error}>{error}</Text>}
-        <View style={styles.buttonContainer}>
-          <Button title="Agregar Formulario" onPress={handleAddForm} />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button title="Ver Formularios" onPress={handleSeeForms} />
-        </View>
+        <TouchableOpacity style={styles.buttonContainer} onPress={handleAddForm}>
+          <Text style={styles.buttonText}>Agregar Formulario</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonContainer} onPress={handleSeeForms}>
+          <Text style={styles.buttonText}>Ver Formularios</Text>
+        </TouchableOpacity>
         <Modal style={styles.modal} isVisible={isModalVisible} onBackdropPress={showModal}>
           <View style={styles.modalContent}>
             <Text style={styles.modalText}>¡Formulario creado con éxito!</Text>
-            <Button title="Cerrar" onPress={showModal} />
+            <TouchableOpacity style={styles.modalButton} onPress={showModal}>
+              <Text style={styles.modalButtonText}>Cerrar</Text>
+            </TouchableOpacity>
           </View>
         </Modal>
       </View>
@@ -107,6 +109,16 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: '100%',
     marginBottom: 10,
+    backgroundColor: '#037DAA',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   modal: {
     alignItems: 'center',
@@ -121,6 +133,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 20,
     color: '#333333',
+  },
+  modalButton: {
+    backgroundColor: '#037DAA',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  modalButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

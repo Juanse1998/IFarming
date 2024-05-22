@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Platform, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform, ScrollView } from 'react-native';
 import SelectComponent from '../select/SelectComponent';
 import { connect } from "react-redux";
 import { addField, removeField, updateField } from '../../redux/actions/action';
@@ -77,18 +77,18 @@ const EditForm = ({ route, updateField, addField, removeField }) => {
             />
             {errorFields[index] && <Text style={styles.error}>{errorFields[index]}</Text>}
             <View style={styles.buttonContainer}>
-              <View style={styles.buttonWrapper}>
-                <Button title="Actualizar" onPress={() => handleUpdateField(index)} />
-              </View>
-              <View style={styles.buttonWrapper}>
-                <Button title="Eliminar" onPress={() => handleRemoveField(index)} />
-              </View>
+              <TouchableOpacity style={styles.buttonWrapper} onPress={() => handleUpdateField(index)}>
+                <Text style={styles.buttonText}>Actualizar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.buttonWrapper} onPress={() => handleRemoveField(index)}>
+                <Text style={styles.buttonText}>Eliminar</Text>
+              </TouchableOpacity>
             </View>
           </View>
         ))}
-        <View style={styles.buttonWrapper}>
-          <Button title="Agregar campo" onPress={handleAddField} />
-        </View>
+        <TouchableOpacity style={styles.buttonWrapper} onPress={handleAddField}>
+          <Text style={styles.buttonText}>Agregar campo</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
 
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    marginBottom: 5,
+    marginBottom:5,
     color: '#333',
     marginRight: 10,
   },
@@ -148,7 +148,17 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     marginRight: 10,
-    width: Platform.OS === 'web' ? 150 : 'auto',
+    width: Platform.OS === 'web' ? 180 : 'auto',
+    backgroundColor: '#037DAA',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
   error: {
     color: 'red',
