@@ -1,6 +1,4 @@
-import { StyleSheet } from "react-native-web";
-
-export const styles = StyleSheet.create({
+export const styles = {
   container: {
     flex: 1,
     padding: 20,
@@ -8,20 +6,21 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: "#000",
     shadowOpacity: 0.1,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 5 },
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 2 },
     elevation: 5,
     alignItems: "center",
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
     color: "#333",
+    marginBottom: 20
   },
   fieldContainer: {
     marginVertical: 15,
-    padding: 10,
+    padding: 15,
     backgroundColor: "#fff",
     borderRadius: 10,
     shadowColor: "#000",
@@ -29,37 +28,41 @@ export const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowOffset: { width: 0, height: 2 },
     width: 300,
-    height: "auto",
     alignItems: "center",
+    flexDirection: "row",
   },
   inputWrapper: {
-    width: 300,
-    height: 30,
+    width: 250,
+    marginVertical: 10,
   },
   inputContainer: {
-    borderBottomWidth: 0,
-    padding: 0,
-    margin: 0,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    width: "70%",
   },
   label: {
-    fontSize: 14,
-    color: "#666",
+    fontSize: 16,
+    color: "#000",
+    marginRight: 10,
     marginBottom: 5,
   },
   input: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#ccc", 
     borderRadius: 5,
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    width: "300px",
-    height: "30px",
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    width: "100%",
+    color: "#333"
   },
   picker: {
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 5,
-    width: 300,
+    width: 150, 
     height: 30,
   },
-});
+};

@@ -23,7 +23,7 @@ const SelectComponent = ({ selectedValue, setSelectedValue, options, addOption, 
           onValueChange={(itemValue) => setSelectedValue(itemValue)}
           enabled={editable}
         >
-          <Picker.Item label="Seleccionar" value={null} />
+          <Picker.Item label="Seleccionar" value={''} />
           <Picker.Item label="Texto" value="text" />
           <Picker.Item label="Número" value="number" />
           <Picker.Item label="Contraseña" value="password" />

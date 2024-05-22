@@ -25,7 +25,7 @@ const CreateForm = ({ addForm, addField }) => {
     setError(null);
     const formId = new Date().getTime().toString();
     addForm(formId, formName);
-    addField(formId, null, null, null);
+    addField(formId, null, null, null, null);
     setFormName('');
     showModal();
   };

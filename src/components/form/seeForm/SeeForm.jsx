@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text, Input } from "react-native";
+import { View, Text, TextInput } from "react-native"; // Cambio de "Input" a "TextInput"
 import { Picker } from "@react-native-picker/picker";
 import { styles } from "./styles";
 
 const SeeForm = ({ route }) => {
   const { form } = route.params;
+  console.log(form);
   
   return (
     <View style={styles.container}>
@@ -29,13 +30,10 @@ const SeeForm = ({ route }) => {
               </Picker>
             </View>
           ) : (
-            <Input
+            <TextInput
               placeholder={element.placeholder}
               keyboardType={element.inputType}
-              inputContainerStyle={styles.inputContainer}
-              labelStyle={styles.label}
-              inputStyle={[styles.input, { minHeight: 30 }]}
-              containerStyle={styles.inputWrapper}
+              style={[styles.input, { minHeight: 30, borderColor: 'black', borderWidth: 1 }]} // Aplicar estilos directamente aquí
             />
           )}
         </View>
