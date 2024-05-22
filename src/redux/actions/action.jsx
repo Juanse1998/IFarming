@@ -8,10 +8,10 @@ export const removeForm = (formId) => ({
   payload: { formId }
 });
 
-export const addField = (formId, fieldName, placeholder, inputType) => {
+export const addField = (formId, fieldName, placeholder, inputType, options) => {
   return {
     type: 'ADD_FIELD',
-    payload: { formId, fieldName, placeholder, inputType }
+    payload: { formId, fieldName, placeholder, inputType, options }
   };
 };
 
@@ -20,7 +20,7 @@ export const removeField = (formId, index) => ({
   payload: { formId, index }
 });
 
-export const updateField = (formId, index, fieldName, placeholder, inputType) => ({
+export const updateField = (formId, index, fieldName, placeholder, inputType, options) => ({
   type: 'UPDATE_FIELD',
-  payload: { formId, index, fieldName, placeholder, inputType }
+  payload: { formId, index, fieldName, placeholder, inputType, options }
 });
