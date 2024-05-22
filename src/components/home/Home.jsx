@@ -1,13 +1,31 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from 'react-native';
-import imgPez from '../../../assets/pez2.svg';
+import React, { useState, useEffect } from 'react';
+import { ActivityIndicator, View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from 'react-native';
+import imgPez from '../../../assets/pez2.png';
 import { useNavigation } from '@react-navigation/native';
-
 
 const { width } = Dimensions.get('window');
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    // Simular una carga de 2 segundos
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    // Limpiar el temporizador si el componente se desmonta
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#037DAA" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -19,7 +37,7 @@ const Home = () => {
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CreateForm')}>
           <Text style={styles.buttonText}>Crear formulario</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}onPress={() => navigation.navigate('FormListScreen')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('FormListScreen')}>
           <Text style={styles.buttonText}>Ver formulario</Text>
         </TouchableOpacity>
       </View>
@@ -28,14 +46,19 @@ const Home = () => {
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginTop: 130
+    marginTop: 130,
   },
   image: {
-    width: '90%',
+    width: 200,
     aspectRatio: 16 / 9,
     resizeMode: 'contain',
   },

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addField, addForm } from "../../redux/actions/action";
+import { addField, addForm } from "../../../redux/actions/action";
 import { View, TouchableOpacity, TextInput, Text, StyleSheet, Platform } from "react-native";
 import { useNavigation } from '@react-navigation/native'; 
 import Modal from 'react-native-modal';

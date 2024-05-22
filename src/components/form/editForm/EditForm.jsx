@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform, ScrollView } from 'react-native';
-import SelectComponent from '../select/SelectComponent';
+import SelectComponent from '../../select/SelectComponent';
 import { connect } from "react-redux";
-import { addField, removeField, updateField } from '../../redux/actions/action';
+import { addField, removeField, updateField } from '../../../redux/actions/action';
+import Modal from 'react-native-modal';
 
 const EditForm = ({ route, updateField, addField, removeField }) => {
   const { form } = route.params;
   const [fields, setFields] = useState(form ? [...form.fields] : []);
   const [errorFields, setErrorFields] = useState([]);
+  const [isModalVisible, setModalVisible] = useState(false);
+
+
+  const showModal = () => {
+    setModalVisible(!isModalVisible);
+  }
 
   const handleAddField = () => {
-    const newField = { fieldName: '', placeholder: '', inputType: '' };
+    const newField = { fieldName: '', placeholder: '', inputType: '', options: [] };
     setFields([...fields, newField]);
-    addField(form.id, newField.fieldName, newField.placeholder, newField.inputType);
+    addField(form.id, newField.fieldName, newField.placeholder, newField.inputType, newField.options);
     setErrorFields([...errorFields, null]);
   };
 
@@ -24,10 +31,11 @@ const EditForm = ({ route, updateField, addField, removeField }) => {
       setErrorFields(newErrorFields);
       return;
     }
-    updateField(form.id, index, updatedField.fieldName, updatedField.placeholder, updatedField.inputType);
+    updateField(form.id, index, updatedField.fieldName, updatedField.placeholder, updatedField.inputType, updatedField.options);
     const newErrorFields = [...errorFields];
     newErrorFields[index] = null;
     setErrorFields(newErrorFields);
+    showModal();
   };
 
   const handleChangeField = (index, key, value) => {
@@ -39,6 +47,15 @@ const EditForm = ({ route, updateField, addField, removeField }) => {
     setFields(updatedFields);
   };
   
+  const handleAddOption = (index, option) => {
+    const updatedFields = [...fields];
+    if (!Array.isArray(updatedFields[index].options)) {
+      updatedFields[index].options = [];
+    }
+    updatedFields[index].options.push(option);
+    setFields(updatedFields);
+  };
+
   const handleRemoveField = (index) => {
     const updatedFields = [...fields];
     updatedFields.splice(index, 1);
@@ -74,6 +91,8 @@ const EditForm = ({ route, updateField, addField, removeField }) => {
             <SelectComponent
               selectedValue={field.inputType}
               setSelectedValue={(value) => handleChangeField(index, 'inputType', value)}
+              options={field.options || []}
+              addOption={(option) => handleAddOption(index, option)}
             />
             {errorFields[index] && <Text style={styles.error}>{errorFields[index]}</Text>}
             <View style={styles.buttonContainer}>
@@ -86,12 +105,19 @@ const EditForm = ({ route, updateField, addField, removeField }) => {
             </View>
           </View>
         ))}
+        <Modal style={styles.modal} isVisible={isModalVisible} onBackdropPress={showModal}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>¡Formulario actualizado con éxito!</Text>
+            <TouchableOpacity style={styles.modalButton} onPress={showModal}>
+              <Text style={styles.modalButtonText}>Cerrar</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
         <TouchableOpacity style={styles.buttonWrapper} onPress={handleAddField}>
           <Text style={styles.buttonText}>Agregar campo</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
-
   );
 };
 
@@ -128,7 +154,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    marginBottom:5,
+    marginBottom: 5,
     color: '#333',
     marginRight: 10,
   },
@@ -162,15 +188,33 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'red',
-    marginTop: 5,
-    textAlign: 'center'
+    marginTop: 10,
   },
+  modal: {
+    alignItems: 'center',
+  },
+  modalContent: {
+    backgroundColor: '#ffffff',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalText: {
+    fontSize: 18,
+    marginBottom: 20,
+    color: '#333333',
+  },
+  modalButton: {
+    backgroundColor: '#037DAA',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  modalButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  }
 });
 
-const mapDispatchToProps = {
-  updateField,
-  addField,
-  removeField
-};
-
-export default connect(null, mapDispatchToProps)(EditForm);
+export default connect(null, { addField, removeField, updateField })(EditForm);

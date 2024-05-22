@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, FlatList, StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import { removeForm } from "../../redux/actions/action";
+import { removeForm } from "../../../redux/actions/action";
 import { useNavigation } from '@react-navigation/native';
 
 const ListForm = ({ forms, removeForm }) => {
@@ -21,26 +21,30 @@ const ListForm = ({ forms, removeForm }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Listado de formularios:</Text>
       <View style={{ flex: 1 }}>
-        <FlatList
-          data={formArray}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.itemContainer}>
-              <Text style={styles.itemText}>{item.name}</Text>
-              <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.buttonWrapper} onPress={() => navigateSeeForm(item)}>
-                  <Text style={styles.buttonText}>Ver</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonWrapper} onPress={() => navigateEditForm(item)}>
-                  <Text style={styles.buttonText}>Editar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonWrapper} onPress={() => removeForm(item.id)}>
-                  <Text style={styles.buttonText}>Eliminar</Text>
-                </TouchableOpacity>
+        {formArray.length === 0 ? (
+          <Text style={styles.noFormsText}>No hay formularios creados</Text>
+        ) : (
+          <FlatList
+            data={formArray}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <View style={styles.itemContainer}>
+                <Text style={styles.itemText}>{item.name}</Text>
+                <View style={styles.buttonContainer}>
+                  <TouchableOpacity style={styles.buttonWrapper} onPress={() => navigateSeeForm(item)}>
+                    <Text style={styles.buttonText}>Ver</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.buttonWrapper} onPress={() => navigateEditForm(item)}>
+                    <Text style={styles.buttonText}>Editar</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.buttonWrapper} onPress={() => removeForm(item.id)}>
+                    <Text style={styles.buttonText}>Eliminar</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-          )}
-        />
+            )}
+          />
+        )}
       </View>
     </View>
   );
@@ -58,6 +62,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
     color: '#333',
+  },
+  noFormsText: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: '#888',
+    marginTop: 50,
   },
   itemContainer: {
     flexDirection: 'row',
