@@ -2,10 +2,10 @@ import React from 'react';
 import { Platform, View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import CreateForm from './components/form/CreateForm';
-import ListForm from './components/form/ListForm';
-import EditForm from './components/form/EditForm';
-import SeeForm from './components/form/SeeForm';
+import CreateForm from './components/form/createForm/CreateForm';
+import ListForm from './components/form/listForm/ListForm';
+import EditForm from './components/form/editForm/EditForm';
+import SeeForm from './components/form/seeForm/SeeForm';
 import Nav from './components/nav/Nav';
 import Home from './components/home/Home';
 
@@ -13,7 +13,9 @@ const Stack = createStackNavigator();
 
 const HomeScreen = ({ navigation }) => (
   <View style={styles.container}>
-    <Nav />
+    {
+      Platform.OS === 'web' ?  <Nav /> : null
+    }
     <Stack.Navigator initialRouteName="Home"
       screenOptions={{
         headerShown: Platform.OS === 'web' ? false : true,
