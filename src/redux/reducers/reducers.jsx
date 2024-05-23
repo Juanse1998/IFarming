@@ -28,9 +28,9 @@ const formReducer = (state = initialState, action) => {
       };
     }
     case 'ADD_FIELD': {
-      const { formId, fieldName, placeholder, inputType } = action.payload;
+      const { formId, fieldName, placeholder, inputType, options } = action.payload;
       const currentForm = state.forms[formId];
-      const newField = { fieldName, placeholder, inputType };
+      const newField = { fieldName, placeholder, inputType, options };
       const updatedFields = [...currentForm.fields, newField];
       return {
         ...state,
@@ -45,7 +45,6 @@ const formReducer = (state = initialState, action) => {
     }
     case 'REMOVE_FIELD': {
       const { formId, index } = action.payload;
-      console.log('REMOVE', action.payload)
       return {
         ...state,
         forms: {
@@ -58,10 +57,10 @@ const formReducer = (state = initialState, action) => {
       };
     }
     case 'UPDATE_FIELD': {
-      const { formId, index, fieldName, placeholder, inputType } = action.payload;
+      const { formId, index, fieldName, placeholder, inputType, options } = action.payload;
       const currentForm = state.forms[formId];
       const updatedFields = currentForm.fields.map((field, i) =>
-        i === index ? { fieldName, placeholder, inputType } : field
+        i === index ? { fieldName, placeholder, inputType, options } : field
       );
       return {
         ...state,
