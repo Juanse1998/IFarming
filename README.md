@@ -1,4 +1,4 @@
-# Wisboo
+# IFarming App
  
 _Este proyecto contiene una apilación Web y Movil, la cual, se realizo utilizando Expo, React Native y CSS_
 _Debera tener en cuenta que se realizó una versión web y una version movil_
