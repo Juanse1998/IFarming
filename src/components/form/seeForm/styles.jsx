@@ -31,18 +31,6 @@ export const styles = {
     alignItems: "center",
     flexDirection: "row",
   },
-  inputWrapper: {
-    width: 250,
-    marginVertical: 10,
-  },
-  inputContainer: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    width: "70%",
-  },
   label: {
     fontSize: 16,
     color: "#000",
@@ -55,7 +43,7 @@ export const styles = {
     borderRadius: 5,
     paddingHorizontal: 10,
     paddingVertical: 8,
-    width: "100%",
+    width: 220,
     color: "#333"
   },
   picker: {
