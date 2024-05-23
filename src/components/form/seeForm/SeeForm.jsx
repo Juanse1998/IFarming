@@ -5,7 +5,6 @@ import { styles } from "./styles";
 
 const SeeForm = ({ route }) => {
   const { form } = route.params;
-  console.log(form);
   
   return (
     <View style={styles.container}>
