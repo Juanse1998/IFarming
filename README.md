@@ -1,6 +1,7 @@
 # Wisboo
  
-_Este proyecto contiene una apilación Web y Movil, la cual, se realizo utilizando Expo, React Native y CSS
+_Este proyecto contiene una apilación Web y Movil, la cual, se realizo utilizando Expo, React Native y CSS_
+_Debera tener en cuenta que se realizó una versión web y una version movil_
 
 ## Comenzando 🚀
 
@@ -8,14 +9,13 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 
 ### Instalación 🔧
 
-_1° debera clonar el repositorio en su computadora.
+_1° debera clonar el repositorio en su computadora._
 
 _2° debera ingresar a la carpeta raiz y ejecutar el siguiente comando:_
 
 ```
 npm install
 ```
-
 
 ## Ejecutando ⚙️
 
