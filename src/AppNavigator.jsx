@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform, View, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import CreateForm from './components/form/createForm/CreateForm';
 import ListForm from './components/form/listForm/ListForm';
@@ -11,8 +11,16 @@ import Home from './components/home/Home';
 
 const Stack = createStackNavigator();
 
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background:'white'
+  },
+};
+
 const HomeScreen = ({ navigation }) => (
-  <View style={styles.container}>
+  <View style={{ ...styles.container}}>
     {
       Platform.OS === 'web' ?  <Nav /> : null
     }
@@ -39,7 +47,7 @@ const HomeScreen = ({ navigation }) => (
 
 function AppNavigator() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={MyTheme}>
       <HomeScreen />
     </NavigationContainer>
   );
@@ -47,7 +55,7 @@ function AppNavigator() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1  
   },
 });
 

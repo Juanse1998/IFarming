@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     height: 60,
-    backgroundColor: 'white',
     paddingHorizontal: 10,
   },
   logoContainer: {

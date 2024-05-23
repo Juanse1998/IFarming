@@ -5,12 +5,13 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'black !important'
   },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginTop: 130,
+    marginTop: 130
   },
   image: {
     width: 200,

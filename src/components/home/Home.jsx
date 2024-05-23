@@ -36,7 +36,7 @@ const Home = () => {
           <Text style={styles.buttonText}>Crear formulario</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('FormListScreen')}>
-          <Text style={styles.buttonText}>Ver formulario</Text>
+          <Text style={styles.buttonText}>Ver formularios</Text>
         </TouchableOpacity>
       </View>
     </View>
