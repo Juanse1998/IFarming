@@ -34,6 +34,27 @@ _Android:_
 npx expo start
 a
 ```
+## Imagenes Android
+
+|  ![Android](assets/a-1.png)  |  ![Android](assets/a-2.png)  |  ![Android](assets/a-3.png)  |
+|:----------------------------:|:----------------------------:|:----------------------------:|
+| Imagen 1                     | Imagen 2                     | Imagen 3                     |
+
+|  ![Android](assets/a-4.png)  |  ![Android](assets/a-5.png)  |
+|:----------------------------:|:----------------------------:|
+| Imagen 4                     | Imagen 5                     |
+
+## Imagenes Web
+
+|  ![Web](assets/Web-1.png)  |  ![Web](assets/web-22.png)  |  ![Web](assets/web-2.png)  |
+|:--------------------------:|:---------------------------:|:--------------------------:|
+| Imagen 1                   | Imagen 2                    | Imagen 3                   |
+
+|  ![Web](assets/web-3.png)  |  ![Web](assets/web-4.png)  |
+|:--------------------------:|:--------------------------:|
+| Imagen 4                   | Imagen 5                   |
+
+
 
 ## Construido con 🛠️
 
