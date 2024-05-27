@@ -9,9 +9,9 @@ const Nav = () => {
 
   return (
     <View style={styles.navContainer}>
-      <View style={styles.logoContainer}>
+      <TouchableOpacity style={styles.logoContainer} onPress={() => navigation.navigate('Home')}>
         <Image style={styles.logo} source={logo} resizeMode="contain" />
-      </View>
+      </TouchableOpacity>
       <View style={styles.linksContainer}>
       <TouchableOpacity style={styles.navLink} onPress={() => navigation.navigate('Home')}>
           <Text style={styles.navText}>Inicio</Text>
